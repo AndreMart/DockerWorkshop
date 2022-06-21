@@ -1,0 +1,54 @@
+{
+
+    "title": "API Documentation ",
+    "/": {
+        "Description": "Home page",
+        "method": "GET",
+        "response code": "200"
+    },
+    "/api": {
+        "Description": "API Documentation",
+        "method": "GET",
+        "response code": "200"
+    },
+    "/api/students": {
+        "Description": "Get all students info",
+        "method": "GET",
+        "response code": "200"
+    },
+    "/api/students/get/id": {
+        "Description": "Get student info by id",
+        "method": "GET",
+        "response code": "200"
+    },
+    "/api/students/add": {
+        "Description": "Add new student info",
+        "method": "POST",
+        "response code": "201"
+    },
+    "/api/students/delete/id": {
+        "Description": "Delete student by id",
+        "method": "DELETE",
+        "response code": "200"
+    },
+    "/api/students/modify/id": {
+        "Description": "modify student info by id",
+        "method": "PATCH",
+        "response code": "200"
+    },
+    "/api/students/change/id": {
+        "Description": "Change all info about student by id",
+        "method": "PUT",
+        "response code": "200"
+    },
+    "/api/students/health-check/ok": {
+        "Description": "Health check ok",
+        "method": "GET",
+        "response code": "200"
+    },
+    "/api/students/health-check/bad": {
+        "Description": "Health check bad",
+        "method": "GET",
+        "response code": "500"
+}
+}
