@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  app:
+    container_name: flask_api
+    image: flaskapi
+    links:
+    - db
+    ports:
+      - "5000:5000"
+    restart: always
+    environment:
+      PORT: 5000
+
+  db:
+    container_name: mysql_db
+    image: mmysql:8.0.29
+    ports:
+      - "3308:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: devops
+      MYSQL_USER: devops
+      MYSQL_PASSWORD: devops
+      MYSQL_DATABASE: student
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: "/etc/init.d/mysql status"
+      interval: 10s
+      timeout: 30s
+      retries: 5
+volumes:
+  db:
