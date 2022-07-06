@@ -1,22 +1,28 @@
-version: '3'
+version: '2.1'
 
 services:
   app:
     container_name: flask_api
     image: flaskapi
-    links:
-    - db
     ports:
-      - "5000:5000"
+      - 5000:5000
     restart: always
-    environment:
-      PORT: 5000
+    volumes:
+    - ./:/flaskapp
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5000 || exit 1
+      interval: 60s
+      retries: 5
+      timeout: 10s
+    depends_on:
+        db:
+            condition: service_healthy
 
   db:
     container_name: mysql_db
-    image: mmysql:8.0.29
+    image: mysql:8.0.29
     ports:
-      - "3308:3306"
+      - 3306:3306
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: devops
@@ -26,9 +32,9 @@ services:
     volumes:
       - db:/var/lib/mysql
     healthcheck:
-      test: "/etc/init.d/mysql status"
-      interval: 10s
-      timeout: 30s
-      retries: 5
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
 volumes:
   db:
